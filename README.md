@@ -12,3 +12,18 @@
 ![图片5](https://github.com/cocolove2/LISDemo/blob/master/app/screenshot/pic5.png)
 ![图片6](https://github.com/cocolove2/LISDemo/blob/master/app/screenshot/pic6.png)
 ![图片7](https://github.com/cocolove2/LISDemo/blob/master/app/screenshot/pic7.png)
+
+###[图片选择demo参考](https://github.com/cocolove2/LISDemo/blob/master/app/src/main/java/com/lisdemo/MainActivity.java)
+
+###[图片预览demo参考](https://github.com/cocolove2/LISDemo/blob/master/app/src/main/java/com/lisdemo/MyPreActivity.java)
+* 图片预览的支持是使用隐式跳转。
+```
+  <intent-filter>
+                <action android:name="com.cocolover2.lis.ACTION_preview" />
+                //your packagename+".category.PREVIEW"
+                <category android:name="com.lisdemo.category.PREVIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+  </intent-filter>
+```
+
+
