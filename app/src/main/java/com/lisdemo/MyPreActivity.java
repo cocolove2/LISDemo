@@ -31,7 +31,7 @@ public class MyPreActivity extends LisSimplePreviewPagerActivity<ImageItem> {
         topTitle = (TextView) findViewById(R.id.pre_top_bar_title);
         sizeTv = (TextView) findViewById(R.id.pre_bottom_bar_size);
         select = (ImageView) findViewById(R.id.pre_bottom_bar_select);
-        topTitle.setText("(" + getStartPos() + "/" + getAllDatasSize() + ")");
+        topTitle.setText("(" + (getStartPos() + 1) + "/" + getAllDatasSize() + ")");
         currentPos = getStartPos();
         mItem = getItem(currentPos);
         setMaxSize(3);
@@ -72,7 +72,7 @@ public class MyPreActivity extends LisSimplePreviewPagerActivity<ImageItem> {
             currentPos = position;
             mItem = getItem(position);
             updateBottom();
-            topTitle.setText("(" + position + "/" + getAllDatasSize() + ")");
+            topTitle.setText("(" + (position + 1) + "/" + getAllDatasSize() + ")");
         }
     };
 

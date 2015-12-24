@@ -132,7 +132,7 @@ public class ImageGridAdapter extends BaseAdapter {
 
     private void doPreViewImgClicked(int position) {
         Intent intent = new Intent(LISConstant.ACTION_PRE);
-        intent.addCategory(context.getPackageName() + ".category.PREVIEW");
+        intent.addCategory(context.getPackageName() + LISConstant.CATEGORY_SUFFIX);
         intent.putExtra(LISConstant.PRE_IMG_START_POSITION, position);
         intent.putParcelableArrayListExtra(LISConstant.PRE_IMG_DATAS, dataList);
         context.startActivity(intent);

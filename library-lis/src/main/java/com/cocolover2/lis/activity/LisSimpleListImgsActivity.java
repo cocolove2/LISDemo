@@ -1,5 +1,6 @@
 package com.cocolover2.lis.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.cocolover2.lis.LISConstant;
 import com.cocolover2.lis.OnSelectResultListener;
 import com.cocolover2.lis.R;
 
@@ -100,7 +102,11 @@ public abstract class LisSimpleListImgsActivity extends LisBaseListImgsActivity
             else
                 showPop();
         } else if (id == R.id.lis_imglist_bottom_pre_btn) {
-            Toast.makeText(this, "预览图片", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LISConstant.ACTION_PRE);
+            intent.addCategory(getPackageName() + LISConstant.CATEGORY_SUFFIX);
+            intent.putExtra(LISConstant.PRE_IMG_START_POSITION, 0);
+            intent.putParcelableArrayListExtra(LISConstant.PRE_IMG_DATAS, getSelectImgs());
+            startActivity(intent);
         }
     }
 }
