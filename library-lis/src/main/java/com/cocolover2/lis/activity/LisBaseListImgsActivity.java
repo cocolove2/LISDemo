@@ -147,6 +147,10 @@ public abstract class LisBaseListImgsActivity extends AppCompatActivity {
         isrefresh = false;
     }
 
+    protected void clearSelectedImgs() {
+        AlbumHelper.clearSelectedImgs();
+    }
+
     @Override
     protected void onPause() {
         super.onPause();

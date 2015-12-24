@@ -60,7 +60,7 @@ public class MainActivity extends LisSimpleListImgsActivity {
         sureBtn.setText("确定(" + selectedCount + ")");
     }
 
-    public static void actionIntent(Activity context, ArrayList<ImageItem> select,int requestCode) {
+    public static void actionIntent(Activity context, ArrayList<ImageItem> select, int requestCode) {
         context.startActivityForResult(new Intent(context, MainActivity.class)
                 .putParcelableArrayListExtra(LISConstant.FLAG_PRE_SELECTED_IMGS, select), requestCode);
     }

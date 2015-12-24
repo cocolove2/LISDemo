@@ -94,6 +94,12 @@ public abstract class LisSimpleListImgsActivity extends LisBaseListImgsActivity
     }
 
     @Override
+    public void onBackPressed() {
+        clearSelectedImgs();
+        super.onBackPressed();
+    }
+
+    @Override
     public void onClick(View v) {
         final int id = v.getId();
         if (id == R.id.lis_imglist_bottom_bucket_btn) {
