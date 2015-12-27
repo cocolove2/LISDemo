@@ -14,7 +14,7 @@ public class BounceBackViewPager extends ViewPager {
 
     private int currentPosition = 0;
     private Rect mRect = new Rect();//用来记录初始位置
-    private boolean handleDefault = true;
+    private boolean handleDefault = true;//默认滑动，不需要左右回弹
     private float preX = 0f;
     private static final float RATIO = 0.5f;//摩擦系数
     private static final float SCROLL_WIDTH = 10f;//滑动阈值
@@ -52,48 +52,49 @@ public class BounceBackViewPager extends ViewPager {
         return super.onTouchEvent(ev);
     }
 
-    private boolean actionMove(MotionEvent ev) {
-        if (getAdapter().getCount() == 1) {
-            float nowX = ev.getX();
-            float offset = nowX - preX;
-            preX = nowX;
-            if (Math.abs(offset) > SCROLL_WIDTH) {//手指滑动的距离大于设定值
+    private void handleOneCount(float offset) {
+        if (Math.abs(offset) > SCROLL_WIDTH) {//手指滑动的距离大于设定值
+            whetherConditionIsRight(offset);
+        } else if (!handleDefault) {//这种情况是已经出现缓冲区域了，手指慢慢恢复的情况
+            if (getLeft() + (int) (offset * RATIO) != mRect.left) {
+                layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
+            }
+        }
+    }
+
+    private void handleMoreCount(float offset) {
+        if (currentPosition == 0) {
+            if (offset > SCROLL_WIDTH) {//手指滑动的距离大于设定值
                 whetherConditionIsRight(offset);
             } else if (!handleDefault) {//这种情况是已经出现缓冲区域了，手指慢慢恢复的情况
-                if (getLeft() + (int) (offset * RATIO) != mRect.left) {
+                if (getLeft() + (int) (offset * RATIO) >= mRect.left) {
                     layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
                 }
             }
-        } else if ((currentPosition == 0 || currentPosition == getAdapter().getCount() - 1)) {
-            float nowX = ev.getX();
-            float offset = nowX - preX;
-            preX = nowX;
-
-            if (currentPosition == 0) {
-                if (offset > SCROLL_WIDTH) {//手指滑动的距离大于设定值
-                    whetherConditionIsRight(offset);
-                } else if (!handleDefault) {//这种情况是已经出现缓冲区域了，手指慢慢恢复的情况
-                    if (getLeft() + (int) (offset * RATIO) >= mRect.left) {
-                        layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
-                    }
-                }
-            } else {
-                if (offset < -SCROLL_WIDTH) {
-                    whetherConditionIsRight(offset);
-                } else if (!handleDefault) {
-                    if (getRight() + (int) (offset * RATIO) <= mRect.right) {
-                        layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
-                    }
+        } else {
+            if (offset < -SCROLL_WIDTH) {
+                whetherConditionIsRight(offset);
+            } else if (!handleDefault) {
+                if (getRight() + (int) (offset * RATIO) <= mRect.right) {
+                    layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
                 }
             }
+        }
+    }
+
+    private boolean actionMove(MotionEvent ev) {
+        final float nowX = ev.getX();
+        final float offset = nowX - preX;
+        if (getAdapter().getCount() == 1) {
+            preX = nowX;
+            handleOneCount(offset);
+        } else if ((currentPosition == 0 || currentPosition == getAdapter().getCount() - 1)) {
+            preX = nowX;
+            handleMoreCount(offset);
         } else {
             handleDefault = true;
         }
-
-        if (!handleDefault) {
-            return true;
-        }
-        return false;
+        return !handleDefault;
     }
 
     private void whetherConditionIsRight(float offset) {
