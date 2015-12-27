@@ -54,6 +54,8 @@ public class ImagePageFragment<T> extends Fragment {
         if (savedInstanceState != null) {
             pagerPosition = savedInstanceState.getInt(STATE_POSITION);
         }
+        /*禁用ViewPager左右两侧拉到边界的渐变颜色*/
+        mPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mPager.setAdapter(new ImagePagerAdapter(getChildFragmentManager()));
         mPager.setCurrentItem(pagerPosition);
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
