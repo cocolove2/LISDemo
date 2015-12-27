@@ -25,5 +25,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
   </intent-filter>
 ```
+##### 最近修改
+* 2015-12-27   加入图片浏览时，viewpager左右回弹效果
 
 
