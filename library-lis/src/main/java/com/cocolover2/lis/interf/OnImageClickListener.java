@@ -1,4 +1,4 @@
-package com.cocolover2.lis;
+package com.cocolover2.lis.interf;
 
 
 public interface OnImageClickListener {

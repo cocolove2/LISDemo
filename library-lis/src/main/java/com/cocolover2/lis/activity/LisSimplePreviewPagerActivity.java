@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.cocolover2.lis.AlbumHelper;
-import com.cocolover2.lis.OnImageClickListener;
+import com.cocolover2.lis.interf.OnImageClickListener;
 import com.cocolover2.lis.entity.ImageItem;
-import com.cocolover2.lis.fragment.ShowImageView;
+import com.cocolover2.lis.ShowImageView;
 
 
 public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPagerActivity<T>

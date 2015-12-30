@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cocolover2.lis.interf.OnPagerUpdateListener;
 import com.cocolover2.lis.activity.LisSimplePreviewPagerActivity;
 import com.cocolover2.lis.entity.ImageItem;
-import com.cocolover2.lis.fragment.ImagePageFragment;
 
 public class MyPreActivity extends LisSimplePreviewPagerActivity<ImageItem> {
     private TextView topTitle;
@@ -52,7 +52,7 @@ public class MyPreActivity extends LisSimplePreviewPagerActivity<ImageItem> {
                 }
             }
         });
-        setOnSimplePagerSelectListener(pagerSelectListener);
+        setOnPagerUpdateListener(pagerSelectListener);
     }
 
     private void updateBottom() {
@@ -66,13 +66,18 @@ public class MyPreActivity extends LisSimplePreviewPagerActivity<ImageItem> {
         }
     }
 
-    private ImagePageFragment.OnSimplePagerSelectListener pagerSelectListener = new ImagePageFragment.OnSimplePagerSelectListener() {
+    private OnPagerUpdateListener pagerSelectListener = new OnPagerUpdateListener() {
         @Override
         public void onSelect(int position) {
             currentPos = position;
             mItem = getItem(position);
             updateBottom();
             topTitle.setText("(" + (position + 1) + "/" + getAllDatasSize() + ")");
+        }
+
+        @Override
+        public void onDeleted(int position) {
+
         }
     };
 

@@ -1,4 +1,4 @@
-package com.cocolover2.lis;
+package com.cocolover2.lis.interf;
 
 /**
  * 已选择的图片路径

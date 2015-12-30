@@ -6,10 +6,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.cocolover2.lis.LISConstant;
-import com.cocolover2.lis.OnSelectResultListener;
+import com.cocolover2.lis.interf.OnSelectResultListener;
 import com.cocolover2.lis.R;
 
 

@@ -14,7 +14,7 @@ import com.cocolover2.lis.R;
 import com.cocolover2.lis.view.HackyViewPager;
 
 import java.util.ArrayList;
-
+@Deprecated
 public class ImagePageFragment<T> extends Fragment {
     private static final String STATE_POSITION = "STATE_POSITION";
     public static final String EXTRA_IMAGE_INDEX = "image_index";

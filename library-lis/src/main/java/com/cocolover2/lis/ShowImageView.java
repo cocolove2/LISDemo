@@ -1,4 +1,4 @@
-package com.cocolover2.lis.fragment;
+package com.cocolover2.lis;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,8 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cocolover2.lis.OnImageClickListener;
-import com.cocolover2.lis.R;
+import com.cocolover2.lis.interf.OnImageClickListener;
 import com.cocolover2.lis.utils.ImageCache;
 import com.cocolover2.lis.utils.ImageUtils;
 

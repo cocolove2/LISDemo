@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
@@ -51,7 +49,6 @@ public class BounceBackViewPager extends ViewPager {
         }
         return super.onTouchEvent(ev);
     }
-
     private void handleOneCount(float offset) {
         if (Math.abs(offset) > SCROLL_WIDTH) {//手指滑动的距离大于设定值
             whetherConditionIsRight(offset);
@@ -61,7 +58,6 @@ public class BounceBackViewPager extends ViewPager {
             }
         }
     }
-
     private void handleMoreCount(float offset) {
         if (currentPosition == 0) {
             if (offset > SCROLL_WIDTH) {//手指滑动的距离大于设定值
@@ -81,7 +77,6 @@ public class BounceBackViewPager extends ViewPager {
             }
         }
     }
-
     private boolean actionMove(MotionEvent ev) {
         final float nowX = ev.getX();
         final float offset = nowX - preX;

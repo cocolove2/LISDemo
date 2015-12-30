@@ -1,7 +1,6 @@
 package com.cocolover2.lis.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 import com.cocolover2.lis.AlbumHelper;
 import com.cocolover2.lis.LISConstant;
 import com.cocolover2.lis.LocalImageLoader;
-import com.cocolover2.lis.OnSelectResultListener;
+import com.cocolover2.lis.interf.OnSelectResultListener;
 import com.cocolover2.lis.R;
 import com.cocolover2.lis.entity.ImageItem;
 

@@ -7,7 +7,14 @@
     <FrameLayout
         android:id="@+id/previewpager_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+
+        <com.cocolover2.lis.view.HackyViewPager
+            android:id="@+id/previewpager_viewpager_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/previewpager_topbar"

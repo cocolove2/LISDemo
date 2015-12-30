@@ -19,7 +19,7 @@ import android.widget.ListView;
 import com.cocolover2.lis.AlbumHelper;
 import com.cocolover2.lis.LISConstant;
 import com.cocolover2.lis.LocalImageLoader;
-import com.cocolover2.lis.OnSelectResultListener;
+import com.cocolover2.lis.interf.OnSelectResultListener;
 import com.cocolover2.lis.R;
 import com.cocolover2.lis.adapter.ImageBucketAdapter;
 import com.cocolover2.lis.adapter.ImageGridAdapter;
