@@ -1,16 +1,15 @@
 package com.cocolover2.lis.activity;
 
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.cocolover2.lis.AlbumHelper;
-import com.cocolover2.lis.interf.OnImageClickListener;
-import com.cocolover2.lis.entity.ImageItem;
 import com.cocolover2.lis.ShowImageView;
+import com.cocolover2.lis.entity.ImageItem;
+import com.cocolover2.lis.interf.OnImageClickListener;
 
 
-public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPagerActivity
+public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPagerActivity<T>
         implements OnImageClickListener {
     final long PER_MB = 1024 * 1024;
     final long PER_KB = 1024;

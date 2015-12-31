@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 
 public abstract class LisBaseListImgsActivity extends AppCompatActivity {
-    //    private int maxSize = 9;
     private ArrayList<ImageItem> dataList = new ArrayList<>();//本地图片的数据源
     private ImageBucket selectedBucket;//先去选择的文件夹
     private ArrayList<ImageBucket> mBucketLists = new ArrayList<>(); //所有图片文件夹
