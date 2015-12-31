@@ -1,5 +1,6 @@
 package com.cocolover2.lis.activity;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
@@ -9,15 +10,10 @@ import com.cocolover2.lis.entity.ImageItem;
 import com.cocolover2.lis.ShowImageView;
 
 
-public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPagerActivity<T>
+public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPagerActivity
         implements OnImageClickListener {
     final long PER_MB = 1024 * 1024;
     final long PER_KB = 1024;
-    private int maxSize;
-
-    protected void setMaxSize(int maxSize) {
-        this.maxSize = maxSize;
-    }
 
     //针对本地图片
     protected void removeSelectItem(ImageItem item) {
@@ -26,9 +22,9 @@ public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPag
     }
 
     protected boolean addToSelectList(ImageItem item) {
-        if (AlbumHelper.getHasSelectCount() >= maxSize) {
+        if (AlbumHelper.getHasSelectCount() >= AlbumHelper.getMaxSize()) {
             item.isSelected = false;
-            Toast.makeText(this, "最多选择" + maxSize + "张图片", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "最多选择" + AlbumHelper.getMaxSize() + "张图片", Toast.LENGTH_SHORT).show();
             return false;
         }
         item.isSelected = true;
@@ -49,6 +45,7 @@ public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPag
         return size / PER_MB + "MB";
     }
 
+    //针对本地图片(其他的展示界面重写该方法)
     @Override
     public Fragment showContentFragment(T content) {
         if (content instanceof ImageItem) {
@@ -58,6 +55,8 @@ public abstract class LisSimplePreviewPagerActivity<T> extends LisBasePreviewPag
         }
         return null;
     }
+
+
 
     @Override
     public void onImgClick() {

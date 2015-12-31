@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 public class ShowSelectedImgs extends AppCompatActivity {
-    private ArrayList<ImageItem> mDatas = new ArrayList<>();
+    private ArrayList<String> mDatas = new ArrayList<>();
     private Button modifyBtn;
     private GridView mGridView;
     ShowSelectAdapter adapter;
@@ -30,7 +30,7 @@ public class ShowSelectedImgs extends AppCompatActivity {
         modifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.actionIntent(ShowSelectedImgs.this, mDatas, 1);
+                MainActivity.actionIntent(ShowSelectedImgs.this, 9 - mDatas.size(), 1);
             }
         });
     }
@@ -38,8 +38,7 @@ public class ShowSelectedImgs extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && data != null) {
-            mDatas.clear();
-            final ArrayList<ImageItem> tmp = data.getParcelableArrayListExtra("datas");
+            final ArrayList<String> tmp = data.getStringArrayListExtra("datas");
             mDatas.addAll(tmp);
             adapter.notifyDataSetChanged();
         }

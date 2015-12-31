@@ -34,7 +34,6 @@ public class MyPreActivity extends LisSimplePreviewPagerActivity<ImageItem> {
         topTitle.setText("(" + (getStartPos() + 1) + "/" + getAllDatasSize() + ")");
         currentPos = getStartPos();
         mItem = getItem(currentPos);
-        setMaxSize(3);
         updateBottom();
         select.setOnClickListener(new View.OnClickListener() {
             @Override

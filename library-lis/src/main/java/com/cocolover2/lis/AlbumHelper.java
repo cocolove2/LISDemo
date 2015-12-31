@@ -19,6 +19,20 @@ public final class AlbumHelper {
     //所有的图片集合
     private ArrayList<ImageItem> imageList = new ArrayList<>();
     private static ArrayList<ImageItem> hasSelectImgs = new ArrayList<>();
+    private static int MAXSIZE;
+
+
+    public static void setMaxSize(int size) {
+        if (size <= 0) {
+            MAXSIZE = 0;
+        } else {
+            MAXSIZE = size;
+        }
+    }
+
+    public static int getMaxSize() {
+        return MAXSIZE;
+    }
 
     /**
      * 获取sd卡中的图片，并创建图片文件夹的列表

@@ -30,9 +30,8 @@ import java.util.ArrayList;
 
 
 public abstract class LisBaseListImgsActivity extends AppCompatActivity {
-    private int maxSize = 9;
+    //    private int maxSize = 9;
     private ArrayList<ImageItem> dataList = new ArrayList<>();//本地图片的数据源
-    private ArrayList<ImageItem> selectImgs = new ArrayList<>();//先前选中的图片
     private ImageBucket selectedBucket;//先去选择的文件夹
     private ArrayList<ImageBucket> mBucketLists = new ArrayList<>(); //所有图片文件夹
 
@@ -78,7 +77,6 @@ public abstract class LisBaseListImgsActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
         setContentView(R.layout.lis_activity_img_list);
-        selectImgs = getIntent().getParcelableArrayListExtra(LISConstant.FLAG_PRE_SELECTED_IMGS);
         initView();
         onMyCreate(savedInstanceState);
         setUpView();
@@ -127,13 +125,7 @@ public abstract class LisBaseListImgsActivity extends AppCompatActivity {
         dataList.clear();
         dataList.addAll(mBucketLists.get(0).imageList);
         adapter = new ImageGridAdapter(this, dataList, itemWidth);
-        adapter.setMaxSelect(maxSize);
         gridView.setAdapter(adapter);
-        if (selectImgs != null && selectImgs.size() > 0) {
-            AlbumHelper.clearSelectedImgs();
-            AlbumHelper.addtoSelectImgs(selectImgs);
-            adapter.refresh();
-        }
         LocalImageLoader.getInstance().setFlingStopLoading(gridView);
         adapter.setResultCallBack(selectResultListener);
     }
@@ -165,19 +157,27 @@ public abstract class LisBaseListImgsActivity extends AppCompatActivity {
     }
 
     protected void setMaxSize(int maxSize) {
-        if (maxSize <= 1) {
-            this.maxSize = 1;
-        } else {
-            this.maxSize = maxSize;
-        }
+        AlbumHelper.setMaxSize(maxSize);
     }
 
     protected int getMaxSize() {
-        return maxSize;
+        return AlbumHelper.getMaxSize();
     }
 
     protected ArrayList<ImageItem> getSelectImgs() {
         return AlbumHelper.getHasSelectImgs();
+    }
+
+    protected ArrayList<String> getSelectImgPaths() {
+        final ArrayList<String> datas = new ArrayList<>();
+        if (getSelectImgs() == null)
+            return null;
+        else {
+            for (ImageItem item : getSelectImgs()) {
+                datas.add(item.imagePath);
+            }
+        }
+        return datas;
     }
 
     protected void setIsPreView(boolean flag) {
@@ -321,5 +321,6 @@ public abstract class LisBaseListImgsActivity extends AppCompatActivity {
         super.onDestroy();
         mBucketLists.clear();
         mBucketLists = null;
+        AlbumHelper.clearSelectedImgs();
     }
 }

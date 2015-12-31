@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.cocolover2.lis.LocalImageLoader;
 import com.cocolover2.lis.entity.ImageItem;
 
 import java.util.ArrayList;
 
 public class ShowSelectAdapter extends BaseAdapter {
-    private ArrayList<ImageItem> data;
+    private ArrayList<String> data;
     private Context context;
 
-    public ShowSelectAdapter(Context context, ArrayList<ImageItem> data) {
+    public ShowSelectAdapter(Context context, ArrayList<String> data) {
         this.context = context;
         this.data = data;
     }
@@ -47,7 +48,13 @@ public class ShowSelectAdapter extends BaseAdapter {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.iv.setImageBitmap(BitmapFactory.decodeFile(data.get(position).imagePath));
+        vh.iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            MyPreActivity2.actionIntent(context,data);
+            }
+        });
+        LocalImageLoader.getInstance().loadImage(data.get(position), vh.iv, R.drawable.default_img);
         return convertView;
     }
 

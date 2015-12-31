@@ -28,6 +28,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MyPreActivity2"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

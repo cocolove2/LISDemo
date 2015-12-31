@@ -32,22 +32,20 @@ public abstract class LisSimpleListImgsActivity extends LisBaseListImgsActivity
         chooseBucketBtn.setText("所有图片");
         chooseBucketBtn.setOnTouchListener(bucketTouchListener);
         chooseBucketBtn.setOnClickListener(this);
-        if (getMaxSize() > 1) {
-            preBtn.setOnClickListener(this);
-            preBtn.setEnabled(false);
-            preBtn.setTextColor(getResources().getColor(R.color.dark_gray));
-        } else {
-            preBtn.setVisibility(View.INVISIBLE);
-        }
         setOnSelectResultListener(this);
-        setIsPreView(true);
-        setMaxSize(9);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        initPreBtn(getSelectImgCount());
+        if (getMaxSize() > 1) {
+            preBtn.setOnClickListener(this);
+            preBtn.setEnabled(false);
+            preBtn.setTextColor(getResources().getColor(R.color.dark_gray));
+            initPreBtn(getSelectImgCount());
+        } else {
+            preBtn.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

@@ -25,16 +25,16 @@ import java.util.ArrayList;
 
 public class ImageGridAdapter extends BaseAdapter {
     final String FILTER_COLOR = "#88000000";
-    private int maxSize = 9;
+//    private int maxSize = 9;
     private OnSelectResultListener resultCallBack = null;
     private ArrayList<ImageItem> dataList;// 数据源
     private Context context;
     private RelativeLayout.LayoutParams lp = null;
     private static boolean isPreView;//是否支持预览
 
-    public void setMaxSelect(int maxSize) {
-        this.maxSize = maxSize;
-    }
+//    public void setMaxSelect(int maxSize) {
+//        this.maxSize = maxSize;
+//    }
 
     public static void setIsPreView(boolean flag) {
         isPreView = flag;
@@ -90,7 +90,7 @@ public class ImageGridAdapter extends BaseAdapter {
         }
         holder.iv.setLayoutParams(lp);
 
-        if (maxSize == 1) {
+        if (AlbumHelper.getMaxSize() <= 1) {
             holder.selected.setVisibility(View.INVISIBLE);
         } else {
             holder.selected.setVisibility(View.VISIBLE);
@@ -103,7 +103,6 @@ public class ImageGridAdapter extends BaseAdapter {
                 holder.iv.setColorFilter(null);
             }
         }
-//        holder.iv.setImageResource(R.drawable.default_img);
         LocalImageLoader.getInstance().loadImage(item.imagePath, holder.iv, R.drawable.default_img);
         setClickListener(holder, item, position);
         return convertView;
@@ -119,7 +118,7 @@ public class ImageGridAdapter extends BaseAdapter {
         holder.iv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isPreView && maxSize > 1) {
+                if (isPreView && AlbumHelper.getMaxSize() > 1) {
                     doPreViewImgClicked(position);
                 } else {
                     doSelectClicked(item, holder);
@@ -144,8 +143,11 @@ public class ImageGridAdapter extends BaseAdapter {
             holder.iv.setColorFilter(null);
             item.isSelected = false;
         } else {
-            if (AlbumHelper.getHasSelectCount() >= maxSize) {
-                Toast.makeText(context, "最多选择" + maxSize + "张图片", Toast.LENGTH_SHORT).show();
+            if (AlbumHelper.getHasSelectCount() >= AlbumHelper.getMaxSize()) {
+                if (AlbumHelper.getMaxSize() > 0)
+                    Toast.makeText(context, "最多选择" + AlbumHelper.getMaxSize() + "张图片", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(context, "当前你不能选择图片", Toast.LENGTH_SHORT).show();
             } else {
                 holder.selected.setImageResource(R.drawable.ic_select_yes);
                 holder.iv.setColorFilter(Color.parseColor(FILTER_COLOR));

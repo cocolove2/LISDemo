@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends LisSimpleListImgsActivity {
     TextView mTextView;
     Button sureBtn;
+    int maxSize;
 
     @Override
     public int getTopLayoutId() {
@@ -30,12 +31,13 @@ public class MainActivity extends LisSimpleListImgsActivity {
         sureBtn = (Button) findViewById(R.id.layout_top_bar_sure);
         mTextView.setText("我是topbar");
         setIsPreView(true);
-        setMaxSize(3);
+        maxSize = getIntent().getIntExtra("maxSize", 0);
+        setMaxSize(maxSize);
 
         sureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = getIntent().putParcelableArrayListExtra("datas", getSelectImgs());
+                Intent i = getIntent().putStringArrayListExtra("datas", getSelectImgPaths());
                 setResult(RESULT_OK, i);
                 finish();
             }
@@ -49,7 +51,7 @@ public class MainActivity extends LisSimpleListImgsActivity {
             if (getSelectImgs().size() == 0)
                 sureBtn.setText("确定");
             else {
-                sureBtn.setText("确定(" + getSelectImgs().size() + ")");
+                sureBtn.setText("确定(" + getSelectImgs().size() + "/" + maxSize + ")");
             }
         }
     }
@@ -57,11 +59,11 @@ public class MainActivity extends LisSimpleListImgsActivity {
     @Override
     public void onSelectImgs(int selectedCount) {
         super.onSelectImgs(selectedCount);
-        sureBtn.setText("确定(" + selectedCount + ")");
+        sureBtn.setText("确定(" + getSelectImgs().size() + "/" + maxSize + ")");
     }
 
-    public static void actionIntent(Activity context, ArrayList<ImageItem> select, int requestCode) {
+    public static void actionIntent(Activity context, int maxSize, int requestCode) {
         context.startActivityForResult(new Intent(context, MainActivity.class)
-                .putParcelableArrayListExtra(LISConstant.FLAG_PRE_SELECTED_IMGS, select), requestCode);
+                .putExtra("maxSize", maxSize), requestCode);
     }
 }
