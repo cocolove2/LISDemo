@@ -107,7 +107,10 @@ public abstract class LisBasePreviewPagerActivity<T> extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
         if (pagerUpdateListener != null)
             pagerUpdateListener.onDeleted(position);
+    }
 
+    protected ArrayList<T> getmImgDatas() {
+        return mImgDatas;
     }
 
     public abstract int getTopBarLayoutId();
