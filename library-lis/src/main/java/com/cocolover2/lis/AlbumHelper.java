@@ -56,7 +56,7 @@ public final class AlbumHelper {
                 int bucketId = cur.getInt(bucketIdIndex);
                 String bucketname = cur.getString(bucketDisplayNameIndex);
                 file = new File(path);
-                if (file.exists() && file.length() == 0)
+                if (!file.exists() || file.length() == 0)
                     continue;
                 ImageItem i = new ImageItem();
                 i.imageId = id;
